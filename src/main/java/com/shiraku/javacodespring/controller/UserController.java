@@ -19,8 +19,11 @@ import java.util.Optional;
 @Validated
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping
     @JsonView(Views.UserSummary.class)

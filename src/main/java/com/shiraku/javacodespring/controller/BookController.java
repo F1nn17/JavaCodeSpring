@@ -16,11 +16,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
-    @Autowired
-    private BookRepository bookRepository;
 
-    @Autowired
-    private AuthorRepository authorRepository;
+    private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+
+    public BookController(BookRepository bookRepository, AuthorRepository authorRepository) {
+        this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+    }
 
     @GetMapping
     public Page<Book> getAllBooks(Pageable pageable) {

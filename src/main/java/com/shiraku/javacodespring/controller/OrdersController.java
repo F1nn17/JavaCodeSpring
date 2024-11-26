@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/orders")
 public class OrdersController {
 
-    @Autowired
-    private OrdersRepository orderRepository;
+    private final OrdersRepository orderRepository;
+    private final CustomerRepository customerRepository;
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    public OrdersController(OrdersRepository orderRepository, CustomerRepository customerRepository) {
+        this.orderRepository = orderRepository;
+        this.customerRepository = customerRepository;
+    }
 
     @PostMapping
     public ResponseEntity<Orders> createOrder(@Valid @RequestBody Orders order) {
